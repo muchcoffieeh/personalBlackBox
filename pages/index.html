@@ -266,43 +266,39 @@
             <!-- /.navbar-top-links -->
             <div class="sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
+                    <span>
+                        <p style="font-size: 2em; font-weight: 900; color: #000; margin-top: 2em;">
+                        Devices
+                    </p>
+                    </span>
+                    <ul class="nav" id="side-menu"  style="display:none;">
                         <li class="sidebar-search">
                         </li>
-                        <li class="with-line">
+                        <li id="device-detail" class="with-line">
+
                             <li class="infoLine">
-                                <span class="infoLabel">Driver</span>
-                                <span class="infoSide" id="bastardName">Jack Frost</span>
-                            </li>
-                            <li class="infoLine">
-                                <span class="infoLabel">Distance from Car</span>
-                                <span class="infoSide" id="distanceFromCar">0.5m</span>
+                                <span class="infoLabel" id="bastardName">29:9A:DE:2E:6D:6C</span>
                             </li>
                             <li class="infoLine">
-                                <span class="infoLabel">Car Make</span>
-                                <span class="infoSide" id="carMake">0.5m</span>
+                                <span class="infoLabel" id="bastardName">14:36:4E:E8:60:85</span>
                             </li>
                             <li class="infoLine">
-                                <span class="infoLabel">Car Model</span>
-                                <span class="infoSide" id="carModel">0.5m</span>
+                                <span class="infoLabel" id="bastardName">21:7A:58:25:8A:1D</span>
                             </li>
-                        </li>
-                        <li class="with-line">
-                            <li>
-                                <span>Driver</span>
-                                <span class="infoSide" id="bastardName">Jack Frost</span>
+                            <li class="infoLine">
+                                <span class="infoLabel" id="bastardName">34:BE:00:6C:72:38</span>
                             </li>
-                            <li>
-                                <span>Distance from Car</span>
-                                <span class="infoSide" id="distanceFromCar">0.5m</span>
+                            <li class="infoLine">
+                                <span class="infoLabel" id="bastardName">4A:E1:F4:E5:08:C4</span>
                             </li>
-                            <li>
-                                <span>Car Make</span>
-                                <span class="infoSide" id="carMake">0.5m</span>
+                            <li class="infoLine">
+                                <span class="infoLabel" id="bastardName">14:31:B8:A7:76:4A</span>
                             </li>
-                            <li>
-                                <span>Car Model</span>
-                                <span class="infoSide" id="carModel">0.5m</span>
+                            <li class="infoLine">
+                                <span class="infoLabel" id="bastardName">0E:EF:93:C6:0A:1F</span>
+                            </li>
+                            <li class="infoLine">
+                                <span class="infoLabel" id="bastardName">00:07:80:06:64:D7</span>
                             </li>
                         </li>
                     </ul>
@@ -317,17 +313,28 @@
                 <input type="text" id="search" placeholder="Type to search">
                 <table id="table">
                 <tr>
+                    <td>Map of Route</td>
                     <td>Speed</td>
                     <td>Acceleration</td>
-                    <td>Fuel</td>
+                    <td>Fuel Percentage</td>
                     <td>Temperature</td>
+                    <td>Engine</td>
+                    <td>Light Status High Beam</td>
+                    <td>Light Status Hazard</td>
                 </tr>
                 </table>
             </div>
 
+            <div style="width:30%">
+            <div>
+                <p style="margin-top: 2em; font-size: 2em; font-weight: 900;">Surrounding Devices</p>
+                <canvas id="canvas" height="450" width="600"></canvas>
+            </div>
+        </div>
+
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">Car Health</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -335,6 +342,36 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span>Map of Route</span>
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        Actions
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">Action</a>
+                                        </li>
+                                        <li><a href="#">Another action</a>
+                                        </li>
+                                        <li><a href="#">Something else here</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <img style="width: 100%;"src="images/map.png">
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <span> Speed</span>
@@ -360,14 +397,49 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div id="morris-area-chart"></div>
+                            <img src="http://api-m2x.att.com/v2/charts/ce1903d61b352e1f05e6debdde8b07b7.png?width=533&height=400">
                         </div>
                         <!-- /.panel-body -->
                     </div>
+
+                    <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span>Acceleration</span>
+                                <div class="pull-right">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        Actions
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right" role="menu">
+                                            <li><a href="#">Action</a>
+                                            </li>
+                                            <li><a href="#">Another action</a>
+                                            </li>
+                                            <li><a href="#">Something else here</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Separated link</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <img src="http://api-m2x.att.com/v2/charts/2cb2c64027760cf1cdd5a7d8b0aa8395.png?width=533&height=400">
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                    </div>
+                                </div>
+                        </div>
+
                     <!-- /.panel -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <span>Map</span>
+                            <span>Fuel Percentage</span>
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -392,52 +464,125 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                    </div>
+                                    <img src="http://api-m2x.att.com/v2/charts/0deb6315637615a625c88986e7d5a981.png?width=533&height=400">
+                                </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                            </div>
+                            <!-- /.row -->
+
+                    </div>
+                        <!-- /.panel-body -->
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span>Engine</span>
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        Actions
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">Action</a>
+                                        </li>
+                                        <li><a href="#">Another action</a>
+                                        </li>
+                                        <li><a href="#">Something else here</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <img src="http://api-m2x.att.com/v2/charts/ce1903d61b352e1f05e6debdde8b07b7.png?width=533&height=400">
+                                </div>
                                     <!-- /.table-responsive -->
                                 </div>
                             </div>
                             <!-- /.row -->
 
                         </div>
-                        <!-- /.panel-body -->
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span>Light Status High Beam</span>
+                                <div class="pull-right">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        Actions
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right" role="menu">
+                                            <li><a href="#">Action</a>
+                                            </li>
+                                            <li><a href="#">Another action</a>
+                                            </li>
+                                            <li><a href="#">Something else here</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Separated link</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <img src="http://api-m2x.att.com/v2/charts/cad69fddf9361562d4273600e292ac2c.png?width=533&height=400">
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span>Light Status Hazard</span>
+                                <div class="pull-right">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        Actions
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right" role="menu">
+                                            <li><a href="#">Action</a>
+                                            </li>
+                                            <li><a href="#">Another action</a>
+                                            </li>
+                                            <li><a href="#">Something else here</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Separated link</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <img src="http://api-m2x.att.com/v2/charts/082742ff293587da4707c9cf4a73fbb2.png?width=533&height=400">
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                    </div>
+                                </div>
+                        </div>
+
+
                     </div>
 
                     <!-- /.panel -->
                 </div>
 
-
-                <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <span>Legend</span>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <img src="images/red.svg">
-                                    <span class="pull-right text-muted small"><em>Severe</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <img src="images/yellow.svg">
-                                    <span class="pull-right text-muted small"><em>Medium</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <img src="images/blue.svg">
-                                    <span class="pull-right text-muted small"><em>Mild</em>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-
-                    <!-- /.panel .chat-panel -->
-                </div>
                 <!-- /.col-lg-4 -->
             </div>
             <!-- /.row -->
@@ -447,6 +592,7 @@
     </div>
     <!-- /#wrapper -->
 
+    <script type="text/javascript" src="js/m2x.js"></script>
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -460,9 +606,11 @@
     <script src="../bower_components/raphael/raphael-min.js"></script>
     <script src="../bower_components/morrisjs/morris.min.js"></script>
     <script src="../js/morris-data.js"></script>
+    <script type="text/javascript" src="js/example.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="js/Chart.js"></script>
 
     <script type="text/javascript">
         var $rows = $('#table tr td');
@@ -477,6 +625,92 @@
         return !reg.test(text);
         }).hide();
 });
+    </script>
+
+        <script>
+        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+        var lineChartData = {
+            labels : [],
+            datasets : [
+                {
+                    label: "My First dataset",
+                    fillColor : "rgba(220,220,220,0.2)",
+                    strokeColor : "#3d3d3d",
+                    pointColor : "#131313",
+                    pointStrokeColor : "#fff",
+                    pointHighlightFill : "#fff",
+                    pointHighlightStroke : "rgba(220,220,220,1)",
+                    data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+                }
+            ]
+
+        }
+
+    window.onload = function(){
+
+        // Do the M2X query
+        var m2xExample = new M2XExample();
+        var streamName = "bluetoothuuid";
+        m2xExample.setLoading(true);
+
+        m2xExample.m2x.devices.streamValues(m2xExample.deviceID, streamName,
+                //$.proxy(m2xExample, "onReceiveStreamValues"),
+                function(data) {
+                    data = data.values;
+                    var transformedData = {};
+                    for (var index in data) {
+                        var object = data[index];
+                        if (object) {
+                            var time = new Date(object.timestamp);
+                            time.setMilliseconds(0);
+                            var timeKey = time.getTime();
+                            var uuid = object.value;
+                            if (!transformedData[timeKey]) transformedData[timeKey] = [];
+                            var dataArray = transformedData[timeKey];
+                            if (dataArray.indexOf(uuid)==-1) {
+                                dataArray.push(uuid);
+                            }
+                        }
+                    }
+
+                    var transformedObjectKeys = Object.keys(transformedData);
+
+                    var object = lineChartData.datasets[0];
+                    var objectData = [];
+                    var objectLabels = [];
+
+                    for (var index in transformedData) {
+                        var devices = transformedData[index];
+                        objectData.push(devices.length);
+                        objectLabels.push(index);
+                    }
+                    lineChartData.labels = objectLabels;
+                    object.data = objectData;
+
+                    var canvas = document.getElementById("canvas");
+                    var ctx = canvas.getContext("2d");
+                    window.myLine = new Chart(ctx).Line(lineChartData, {
+                        responsive: true
+                    });
+
+                    canvas.onclick = function(event) {
+                        var activePoints = window.myLine.getPointsAtEvent(event);
+                        $("#side-menu").show();
+                    };
+
+                },
+                $.proxy(m2xExample, "handleError")
+            );
+
+        // Transfor M2X value result into Datasets
+
+        //  eg.  datasets["uuid"].data == timestamps-list
+
+
+
+    }
+
+
     </script>
 
 </body>
