@@ -682,7 +682,10 @@
                     for (var index in transformedData) {
                         var devices = transformedData[index];
                         objectData.push(devices.length);
-                        objectLabels.push(index);
+                        var ms = parseInt(index);
+                        var date = new Date(ms);
+                        var val = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+                        objectLabels.push(val);
                     }
                     lineChartData.labels = objectLabels;
                     object.data = objectData;
