@@ -1,0 +1,156 @@
+<html>
+    <style>
+        #box{
+            left: 10px;
+            top: 50px;
+            width: 100px;
+            background: green;
+            height: 100px;
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="jquery-2.1.1.min.js"></script>
+    <script src="ewebrtc-sdk.min.js"></script>
+    <script src="data-event-sdk.js"></script>
+    <script src="data-event-sdk.json"></script>
+
+ <script>
+     
+      function onError(data) {
+      console.log(data.error);
+  }
+
+  function configurePhone() {
+      var phone = ATT.rtc.configure(getPhone);
+  }
+
+  function getPhone() {
+      phone = ATT.rtc.Phone.getPhone();
+      registerEvents();
+  }
+
+  function registerEvents() {
+      phone.on('session:ready', onSessionReady);
+      phone.on('session:disconnected', onSessionDisconnected);
+      phone.on('error', onError);
+      login();
+  }
+
+  function onSessionReady() {
+      console.log("onSessionReady");
+  }
+
+  function onSessionDisconnected() {
+      // Do something
+  }
+
+  function login() {
+      ATT.rtc.dhs.createAccessToken({
+          app_scope: 'ACCOUNT_ID',
+          success: associateAccessToken,
+          error: onError
+      });
+  }
+
+  function associateAccessToken(tokenHolder) {
+      ATT.rtc.associateAccessToken({
+          userId: "ranchero3",
+          token: tokenHolder.access_token,
+          success: function() {
+              phone.login({
+                  token: tokenHolder.access_token
+              });
+          },
+          error: onError
+      })
+  }
+
+  function logout() {
+      phone.logout();
+  }
+
+  function makeCall() {
+      $("#alerter").css("visibility", "hidden");
+      $("#caller").css("visibility", "visible");
+      phone.dial({
+          destination: phone.cleanPhoneNumber("PHONE"),
+          mediaType: 'audio',
+          localMedia: document.getElementById('local'),
+          remoteMedia: document.getElementById('remote')
+      });
+  }
+
+  function logError(error) {
+      console.log("MATT:" + error);
+  }
+
+  function logVehicleInfo(data) {
+      //console.log("MATT: "+data.timeStamp +":"+ data.speed);
+      console.log(JSON.stringify(data));
+      var box = document.getElementById("box");
+      // box.innerHTML = " "+data;
+      $.ajax({
+          type: "POST",
+          url: "http://thatmattme:9001/sendCarData",
+          data: {
+              "car": JSON.stringify(data)
+          },
+          dataType: "application/json",
+      });
+  }
+  var handle;
+  var navHandle;
+
+  function getPositionInfo() {
+      console.log("MATT HERE");
+      handle = drive.vehicleinfo.subscribe(logVehicleInfo);
+      navHandle = drive.navigation.subscribe(logVehicleInfo);
+  }
+
+  function checkCrash() {
+      if (!isCrashed) {
+          $.get("/crash", function(data) {
+              if (data.values.length > 0) {
+                  $("#box").css("background-color", "red");
+                  $("#alerter").css("visibility", "visible");
+                  isCrashed = true;
+              } else $("#box").css("background-color", "green")
+          });
+      }
+  }
+  var interval;
+  var isCrashed = false;
+
+  function start() {
+      setInterval("checkCrash()", 2000);
+      // configurePhone();
+      init(getPositionInfo, ["appmanager", "commerce", "connectivity", "identity", "media", "navigation", "notification", "policy", "sa", "search", "settings", "sms", "va", "vehicleinfo"], "myFirstApp");
+  }
+</script>
+<body onload="start()">
+<div align="center" class="all" id="alerter">
+    <img class="logo" src="alerticon.png">
+    <p>Collision Detected</p>
+    <p>Call Home?</p>
+
+    <div class="buttons">
+        <input class="myButton" name="book" type="button" value="Ignore" />
+        <input class="callButton" name="later" type="button" value="Connect Call" onclick="makeCall()" />
+    </div>
+
+    <p class="line"> Calling will persist if no button is pressed</p>
+  </div>
+  
+   <div align="center" class="all" style="margin-top: 10%;" id="caller">
+    <img class="logo" src="alerticon.png">
+    <p>Calling Home</p>
+
+  </div>
+
+
+             <audio id="local" style="display:none"></audio>
+             <audio id="remote" style="display:none"></audio>
+        </body>
+</html>
